@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.weasis.thirdparty.com.sun.media</groupId>
+	<artifactId>jai_imageio</artifactId>
+	<version>1.2.8</version>
+	<name>Java Advanced Imaging Image I/O Tools</name>
+	<description>
+		JAI Image I/O Tools provides reader, writer, and stream plug-ins for the Java Image I/O Framework and
+		Image I/O-based read and write operations for Java Advanced Imaging.Reader-writer plug-ins are
+		supplied for the BMP, JPEG, JPEG 2000, PNG, PNM, Raw, TIFF, and WBMP image formats. The supplied
+		streams and associated service providers use the New I/O APIs.
+	</description>
+	<licenses>
+		<license>
+			<name>BSD License</name>
+			<url>http://www.opensource.org/licenses/bsd-license.php</url>
+			<distribution>manual</distribution>
+		</license>
+	</licenses>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+</project>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.pushing-pixels</groupId>
+  <artifactId>radiance-substance-all</artifactId>
+  <version>3.5.0</version>
+  <name>substance</name>
+  <description>Substance look-and-feel</description>
+  <url>https://github.com/kirill-grouchnikov/radiance</url>
+  <inceptionYear>2018</inceptionYear>
+  <licenses>
+    <license>
+      <name>BSD 3-Clause License</name>
+      <url>https://opensource.org/licenses/BSD-3-Clause</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>kirill-grouchnikov</id>
+      <name>Kirill Grouchnikov</name>
+      <email>kirill.grouchnikov@gmail.com</email>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:https://github.com/kirill-grouchnikov/radiance.git</connection>
+    <developerConnection>scm:git://github.com/kirill-grouchnikov/radiance.git</developerConnection>
+    <url>https://github.com/kirill-grouchnikov/radiance</url>
+  </scm>
+</project>
