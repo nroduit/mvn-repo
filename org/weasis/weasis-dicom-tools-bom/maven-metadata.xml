@@ -3,12 +3,13 @@
   <groupId>org.weasis</groupId>
   <artifactId>weasis-dicom-tools-bom</artifactId>
   <versioning>
-    <release>5.33.0</release>
+    <release>5.33.1</release>
     <versions>
       <version>5.32.0</version>
       <version>5.32.0.2</version>
       <version>5.33.0</version>
+      <version>5.33.1</version>
     </versions>
-    <lastUpdated>20241215173515</lastUpdated>
+    <lastUpdated>20250131112519</lastUpdated>
   </versioning>
 </metadata>
