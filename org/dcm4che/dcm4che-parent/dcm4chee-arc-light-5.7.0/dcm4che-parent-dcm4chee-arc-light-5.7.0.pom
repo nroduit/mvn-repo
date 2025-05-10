@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is part of dcm4che, an implementation of DICOM(TM) in
+   - Java(TM), hosted at https://github.com/gunterze/dcm4che.
+   -
+   - The Initial Developer of the Original Code is
+   - Agfa Healthcare.
+   - Portions created by the Initial Developer are Copyright (C) 2011-2014
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   - Gunter Zeilinger <gunterze@gmail.com>
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the GPL or the LGPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK *****  -->
+   
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.dcm4che</groupId>
+  <artifactId>dcm4che-parent</artifactId>
+  <packaging>pom</packaging>
+  <name>dcm4che DICOM toolkit and utilities</name>
+  <version>dcm4chee-arc-light-5.7.0</version>
+  <description>dcm4che DICOM toolkit and utilities</description>
+  <issueManagement>
+    <system>JIRA</system>
+    <url>http://dcm4che.org/jira</url>
+  </issueManagement>
+  <scm>
+    <connection>scm:git:git://github.com/gunterze/dcm4che.git</connection>
+    <developerConnection>scm:git:git://github.com/gunterze/dcm4che.git</developerConnection>
+    <url>http://github.com/gunterze/dcm4che</url>
+  </scm>
+  <organization>
+    <name>dcm4che.org</name>
+    <url>http://dcm4che.org</url>
+  </organization>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh</artifactId>
+        <version>2.10</version>
+      </extension>
+    </extensions>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+    </plugins>
+    <pluginManagement>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-jar-plugin</artifactId>
+			<version>2.5</version>
+		</plugin>
+						<plugin>
+					<groupId>org.apache.felix</groupId>
+					<artifactId>maven-scr-plugin</artifactId>
+					<version>1.22.0</version>
+					<executions>
+						<execution>
+							<id>generate-scr-scrdescriptor</id>
+							<goals>
+								<goal>scr</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+					</configuration>
+				</plugin>
+		<plugin>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>maven-bundle-plugin</artifactId>
+			<version>2.4.0</version>
+			<configuration>
+				<instructions>
+					<Implementation-Title>${project.name}</Implementation-Title>
+					<Implementation-Version>${project.version}</Implementation-Version>
+					<Implementation-Vendor-Id>${project.groupId}</Implementation-Vendor-Id>
+					<Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
+					<Specification-Title>${project.name}</Specification-Title>
+					<Specification-Version>${project.version}</Specification-Version>
+					<Specification-Vendor>${project.organization.name}</Specification-Vendor>
+				</instructions>
+			</configuration>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-source-plugin</artifactId>
+			<version>2.2.1</version>
+			<executions>
+				<execution>
+					<id>bind-sources</id>
+					<goals>
+						<goal>jar</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+  <modules>
+    <module>dcm4che-audit</module>
+    <module>dcm4che-audit-keycloak</module>
+    <module>dcm4che-conf</module>
+    <module>dcm4che-core</module>
+    <module>dcm4che-dict</module>
+    <module>dcm4che-dict-arc</module>
+    <module>dcm4che-emf</module>
+    <module>dcm4che-hl7</module>
+    <module>dcm4che-image</module>
+    <module>dcm4che-imageio</module>
+    <module>dcm4che-imageio-codec</module>
+    <module>dcm4che-imageio-rle</module>
+    <module>dcm4che-mime</module>
+    <module>dcm4che-net</module>
+    <module>dcm4che-net-audit</module>
+    <module>dcm4che-net-hl7</module>
+    <module>dcm4che-net-imageio</module>
+    <module>dcm4che-soundex</module>
+    <module>dcm4che-tool</module>
+    <module>dcm4che-assembly</module>
+    <module>dcm4che-jboss-modules</module>
+    <module>dcm4che-camel</module>
+    <module>dcm4che-ws-rs</module>
+    <module>dcm4che-json</module>
+    <module>dcm4che-js-dict</module>
+    <module>dcm4che-test-data</module>
+  </modules>
+  <distributionManagement>
+    <repository>
+      <id>www.dcm4che.org</id>
+      <name>dcm4che Repository</name>
+      <url>scp://www.dcm4che.org:443/home/maven2</url>
+    </repository>
+  </distributionManagement>
+  <repositories>
+    <repository>
+      <id>www.dcm4che.org</id>
+      <name>dcm4che Repository</name>
+      <url>http://www.dcm4che.org/maven2</url>
+    </repository>
+    <repository>
+      <id>jboss</id>
+      <url>http://repository.jboss.org/nexus/content/groups/public</url>
+    </repository>
+  </repositories>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.5</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>1.7.5</version>
+        <scope>runtime</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.glassfish</groupId>
+        <artifactId>javax.json</artifactId>
+        <version>1.0.4</version>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.11</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+</project>

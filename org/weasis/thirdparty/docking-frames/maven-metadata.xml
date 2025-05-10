@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<metadata>
+	<groupId>org.weasis.thirdparty</groupId>
+	<artifactId>docking-frames</artifactId>
+	<version>1.1.7</version>
+	<versioning>
+		<release>1.1.7</release>
+		<versions>
+ 			<version>1.1.2</version>
+			<version>1.1.2-P14e</version>
+			<version>1.1.2-P16a</version>
+			<version>1.1.2-P17</version>
+			<version>1.1.2-P18a</version>
+			<version>1.1.2-P19</version>
+			<version>1.1.2-P20a</version>
+			<version>1.1.2-P20c</version>
+			<version>1.1.3p1</version>
+			<version>1.1.4</version>
+			<version>1.1.5</version>
+			<version>1.1.6</version>
+			<version>1.1.7</version>
+		</versions>
+		<lastUpdated>20250510162918</lastUpdated>
+	</versioning>
+</metadata>

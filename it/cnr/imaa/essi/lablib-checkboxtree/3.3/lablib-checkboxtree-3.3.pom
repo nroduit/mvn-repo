@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- CheckboxTree POM -->
+    <artifactId>lablib-checkboxtree</artifactId>
+    <version>3.3</version>
+    <packaging>jar</packaging>
+    <groupId>it.cnr.imaa.essi</groupId>
+
+    <!-- Project Information -->
+    <name>CheckboxTree</name>
+    <description>CheckboxTree is a Java Swing component that provides a Tree with checkboxes in
+		every node. Checkboxes can toggle between two states (checked and unchecked). Disabling
+		and greying checkboxes is also supported. The CheckboxTree API design is inspired by
+		the JTree interface. In particular, the set of checked nodes is maintained by means of the TreeCheckingModel
+		interface, closely modelled after the TreeSelectionModel interface.
+    </description>
+    <url>http://www.essi-lab.eu/projectsSites/lablib-checkboxtree</url>
+    
+    <issueManagement>
+        <system>trac</system>
+        <url>https://ulisse.pin.unifi.it/trac/lablib-checkboxtree</url>
+    </issueManagement>
+
+    <licenses>
+        <license>
+            <name>GNU General Public License</name>
+            <url>http://www.essi-lab.eu/projectsSites/lablib-checkboxtree/COPYING</url>
+            <distribution>manual</distribution>
+            <comments>This license and any later version applies to the program.</comments>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>bigagli</id>
+            <name>Lorenzo Bigagli</name>
+            <email>bigagli@imaa.cnr.it</email>
+            <roles>
+                <role>Project Manager</role>
+                <role>Architect</role>
+            </roles>
+            <organization>IMAA-CNR</organization>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>boldrini</id>
+            <name>Enrico Boldrini</name>
+            <email>boldrini@imaa.cnr.it</email>
+            <roles>
+                <role>Project Manager</role>
+                <role>Architect</role>
+            </roles>
+            <organization>IMAA-CNR</organization>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
+
+    <contributors>
+        <contributor>
+            <name>Jens Happe</name>
+            <email>jhappe@mdacorporation.com</email>
+            <roles>
+                <role>user</role>
+            </roles>
+            <organization>MacDonald, Dettwiler &amp; Associates Ltd. (Canada)</organization>
+            <timezone>-8</timezone>
+        </contributor>
+        <contributor>
+            <name>Fabrizio Papeschi</name>
+            <email>papeschi@imaa.cnr.it</email>
+            <roles>
+                <role>user</role>
+            </roles>
+            <organization>IMAA-CNR (Italy)</organization>
+            <timezone>+1</timezone>
+        </contributor>
+        <contributor>
+            <name>Michael Rudolf</name>
+            <email>javaprog@gmx.de</email>
+            <roles>
+                <role>user</role>
+            </roles>
+            <organization>BT-GIS (Germany)</organization>
+            <timezone>+1</timezone>
+        </contributor>
+    </contributors>
+</project>

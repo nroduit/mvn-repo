@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>bundle</packaging>
+	<groupId>org.weasis.thirdparty.com.sun.media</groupId>
+	<artifactId>jai-lib-windows-x86</artifactId>
+	<name>JAI Native Windows x86 libraries</name>
+	<version>1.1.4-b03</version>
+</project>

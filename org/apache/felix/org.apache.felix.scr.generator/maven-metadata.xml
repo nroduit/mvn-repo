@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<metadata>
+	<groupId>org.apache.felix</groupId>
+	<artifactId>org.apache.felix.scr.generator</artifactId>
+	<version>1.18.5-rc3</version>
+	<versioning>
+		<release>1.18.5-rc3</release>
+		<versions>
+ 			<version>1.18.5-rc3</version>
+			<version>1.18.5-rc</version>
+		</versions>
+		<lastUpdated>20250510162917</lastUpdated>
+	</versioning>
+</metadata>

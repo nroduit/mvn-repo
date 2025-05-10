@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<metadata>
+	<groupId>it.cnr.imaa.essi</groupId>
+	<artifactId>lablib-checkboxtree</artifactId>
+	<version>3.3</version>
+	<versioning>
+		<release>3.3</release>
+		<versions>
+ 			<version>3.3</version>
+		</versions>
+		<lastUpdated>20250510162917</lastUpdated>
+	</versioning>
+</metadata>

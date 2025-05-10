@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<metadata>
+	<groupId>org.dcm4che</groupId>
+	<artifactId>dcm4che-imageio</artifactId>
+	<version>dcm4chee-arc-light-5.7.0-r1</version>
+	<versioning>
+		<release>dcm4chee-arc-light-5.7.0-r1</release>
+		<versions>
+ 			<version>${project.parent.version}-r1</version>
+			<version>dcm4chee-arc-light-5.1.0-r1</version>
+			<version>dcm4chee-arc-light-5.2.1-r1</version>
+			<version>dcm4chee-arc-light-5.7.0-r1</version>
+		</versions>
+		<lastUpdated>20250510162917</lastUpdated>
+	</versioning>
+</metadata>

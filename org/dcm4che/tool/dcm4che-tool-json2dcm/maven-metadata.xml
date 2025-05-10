@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<metadata>
+	<groupId>org.dcm4che.tool</groupId>
+	<artifactId>dcm4che-tool-json2dcm</artifactId>
+	<version></version>
+	<versioning>
+		<release></release>
+		<versions>
+ 			<version>6.0.0-SNAPSHOT</version>
+		</versions>
+		<lastUpdated>20250510162917</lastUpdated>
+	</versioning>
+</metadata>
