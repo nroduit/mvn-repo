@@ -38,7 +38,6 @@
       <version>5.23.0.1</version>
       <version>5.23.0</version>
       <version>5.23.1-IMG-RELEASE</version>
-      <version>5.23.1-SNAPSHOT</version>
       <version>5.23.2.1-IMG-RELEASE</version>
       <version>5.23.2-IMG-RELEASE</version>
       <version>5.23.2</version>
@@ -59,7 +58,6 @@
       <version>5.27.0</version>
       <version>5.29.0.1</version>
       <version>5.29.0.2</version>
-      <version>5.29.0-SNAPSHOT</version>
       <version>5.29.0</version>
       <version>5.29.2.1</version>
       <version>5.29.2.2</version>
@@ -75,7 +73,6 @@
       <version>6.0.0-SNAPSHOT</version>
       <version>5.33.1.2</version>
       <version>5.34.0</version>
-      <version>5.34.0.1-SNAPSHOT</version>
       <version>5.34.0.1</version>
     </versions>
     <lastUpdated>20250814053649</lastUpdated>
