@@ -17,7 +17,7 @@ This is the Maven repository for third-party libraries not available in Maven Ce
         <enabled>false</enabled>
       </snapshots>
       <id>mvn-repo-master</id>
-      <url>https://raw.github.com/nroduit/mvn-repo/master/</url>
+      <url>https://raw.githubusercontent.com/nroduit/mvn-repo/master/</url>
     </repository>
   </repositories>
 ```
