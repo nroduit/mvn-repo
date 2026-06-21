@@ -30,6 +30,7 @@ import re
 import sys
 import time
 import xml.etree.ElementTree as ET
+from xml.sax.saxutils import escape
 
 REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -39,7 +40,15 @@ ARTIFACT_EXTS = {
     ".pom", ".jar", ".war", ".zip",
     ".dll", ".so", ".dylib", ".jnilib",
 }
-CHECKSUMS = {"sha1": hashlib.sha1, "md5": hashlib.md5}
+# sha1/md5 are kept for older Maven clients; sha256/sha512 are preferred by
+# Maven 3.9+ and are not cryptographically broken. All are plain static
+# sibling files, so adding them does not change repository resolution.
+CHECKSUMS = {
+    "sha1": hashlib.sha1,
+    "md5": hashlib.md5,
+    "sha256": hashlib.sha256,
+    "sha512": hashlib.sha512,
+}
 
 changed = 0  # number of files written (or that would be written)
 
@@ -63,7 +72,7 @@ def write_if_changed(path: str, content: bytes, dry_run: bool) -> bool:
 
 
 def write_checksums(path: str, dry_run: bool) -> None:
-    """Write <path>.sha1 and <path>.md5 (40/32 hex chars, no newline — Maven format)."""
+    """Write a hex-digest sibling per CHECKSUMS algo (no newline — Maven format)."""
     with open(path, "rb") as f:
         data = f.read()
     for ext, algo in CHECKSUMS.items():
@@ -124,6 +133,7 @@ def existing_last_updated(meta_path: str):
 def build_metadata(group: str, artifact: str, versions: list[str], last_updated: str) -> bytes:
     release = max((v for v in versions if "snapshot" not in v.lower()),
                   key=version_key, default=versions[-1])
+    group, artifact, release = escape(group), escape(artifact), escape(release)
     lines = [
         '<?xml version="1.0"?>',
         "<metadata>",
@@ -134,7 +144,7 @@ def build_metadata(group: str, artifact: str, versions: list[str], last_updated:
         f"    <release>{release}</release>",
         "    <versions>",
     ]
-    lines += [f"      <version>{v}</version>" for v in versions]
+    lines += [f"      <version>{escape(v)}</version>" for v in versions]
     lines += [
         "    </versions>",
         f"    <lastUpdated>{last_updated}</lastUpdated>",
@@ -177,6 +187,7 @@ def artifacts_changed(version_dir: str) -> bool:
 
 
 def build_snapshot_metadata(group: str, artifact: str, version: str, last_updated: str) -> bytes:
+    group, artifact, version = escape(group), escape(artifact), escape(version)
     lines = [
         '<?xml version="1.0"?>',
         '<metadata modelVersion="1.1.0">',
