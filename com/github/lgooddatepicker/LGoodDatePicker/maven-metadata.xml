@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<metadata>
+	<groupId>com.github.lgooddatepicker</groupId>
+	<artifactId>LGoodDatePicker</artifactId>
+	<version>11.3.0-r1</version>
+	<versioning>
+		<release>11.3.0-r1</release>
+		<versions>
+ 			<version>10.2.3</version>
+			<version>11.3.0-r1</version>
+			<version>7.6.3-rc1</version>
+		</versions>
+		<lastUpdated>20250510162917</lastUpdated>
+	</versioning>
+</metadata>

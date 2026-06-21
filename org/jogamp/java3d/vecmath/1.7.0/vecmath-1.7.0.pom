@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.jogamp.java3d</groupId>
+	<artifactId>vecmath</artifactId>
+	<version>1.7.0</version>
+	
+	<name>Vector Maths Library</name>
+	<description>A Library supporting Vector Maths for the Java Platform</description>	
+
+	<licenses>
+		<license>
+			<name>GPLv2 with Classpath exception</name>
+			<url>http://www.gnu.org/licenses/gpl-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>gouessej</id>
+			<name>Julien Gouesse</name>
+			<url>https://github.com/gouessej</url>
+			<organization>JogAmp</organization>
+			<organizationUrl>http://jogamp.org/</organizationUrl>
+		</developer>
+		<developer>
+			<id>philjord</id>
+			<name>Philip Jordan</name>
+			<email>p.j.nz@outlook.com</email>
+			<url>https://github.com/philjord</url>
+			<organization>JogAmp</organization>
+			<organizationUrl>http://jogamp.org/</organizationUrl>
+			<roles>
+				<role>maintainer</role>
+			</roles>
+			<timezone>+12</timezone>
+		</developer>
+	</developers>
+	<contributors>
+		<contributor>
+			<name>Harvey Harrison</name>
+			<url>https://github.com/hharrison</url>
+			<organization>JogAmp</organization>
+			<organizationUrl>http://jogamp.org/</organizationUrl>
+		</contributor>
+		<contributor>
+			<name>Curtis Rueden</name>
+			<url>http://loci.wisc.edu/people/curtis-rueden</url>
+			<organization>UW-Madison LOCI</organization>
+			<organizationUrl>http://loci.wisc.edu/</organizationUrl>
+		</contributor>
+		<contributor>
+			<name>Kevin Rushforth</name>
+			<url>https://www.linkedin.com/in/kevin-rushforth-8ba3b43</url>
+			<organization>Oracle Corporation</organization>
+			<organizationUrl>http://oracle.com/</organizationUrl>
+		</contributor>
+		<contributor>
+			<name>Chien Yang</name>
+			<url>https://www.linkedin.com/in/chien-yang-0884122</url>
+			<organization>Oracle Corporation</organization>
+			<organizationUrl>http://oracle.com/</organizationUrl>
+		</contributor>		
+	</contributors>
+	
+	<scm>
+		<connection>scm:git:http://github.com/philjord/vecmath</connection>
+		<developerConnection></developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/philjord/vecmath</url>
+	</scm>
+
+	<properties>
+	
+		<!-- NB: Avoid platform encoding warning when copying resources. -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		
+		<!-- Deploy to OSS Sonatype repository by default when releasing. -->
+		<releaseProfiles>sonatype-oss-release</releaseProfiles>
+		
+	</properties>
+
+	<build>	
+	    <defaultGoal>install</defaultGoal>
+
+		<sourceDirectory>${basedir}/src</sourceDirectory>		
+		
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
+            <manifestEntries>
+              <Export-Package>development</Export-Package>
+              <Bundle-Version>${project.version}</Bundle-Version>
+              <Bundle-Name>Vecmath Library</Bundle-Name>
+              <Bundle-SymbolicName>org.jogamp.vecmath</Bundle-SymbolicName>
+              <Export-Package>org.jogamp.vecmath</Export-Package>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.1.1</version>
+				<configuration>
+					<additionalJOption>-Xdoclint:none</additionalJOption>
+					<links>
+						<link>http://docs.oracle.com/javase/8/docs/api/</link>
+					</links>
+				</configuration>				
+			</plugin>
+		</plugins>
+	</build>
+	
+	<profiles>
+		<!-- This profile enables releasing to the OSS Sonatype repository. -->
+		<profile>
+			<id>sonatype-oss-release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.6.7</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>sonatype-nexus-releases</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+							<stagingProgressTimeoutMinutes>15</stagingProgressTimeoutMinutes>
+							<stagingProgressPauseDurationSeconds>12</stagingProgressPauseDurationSeconds>
+							<!--
+							By having no explicit stagingProfileId, we use
+							Staging V2 in "auto" mode, profile will be
+							matched server side
+							-->
+						</configuration>
+					</plugin>
+					<plugin>
+						<inherited>true</inherited>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-deploy-plugin</artifactId>
+						<version>2.8.2</version>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<useAgent>true</useAgent>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-release-plugin</artifactId>
+						<version>2.5.3</version>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>3.0.1</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>3.1.1</version>
+						<configuration>
+							<additionalJOption>-Xdoclint:none</additionalJOption>
+							<links>
+								<link>http://docs.oracle.com/javase/8/docs/api/</link>
+							</links>
+						</configuration>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>	
+</project>

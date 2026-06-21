@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<metadata>
+	<groupId>org.weasis.thirdparty.com.sun.media</groupId>
+	<artifactId>jai_codec</artifactId>
+	<version>1.1.4-b03</version>
+	<versioning>
+		<release>1.1.4-b03</release>
+		<versions>
+ 			<version>1.1.4-b03</version>
+		</versions>
+		<lastUpdated>20250510162918</lastUpdated>
+	</versioning>
+</metadata>

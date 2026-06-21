@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<metadata>
+	<groupId>org.osgi.util</groupId>
+	<artifactId>bindex</artifactId>
+	<version>2.2</version>
+	<versioning>
+		<release>2.2</release>
+		<versions>
+ 			<version>2.2</version>
+		</versions>
+		<lastUpdated>20250510162918</lastUpdated>
+	</versioning>
+</metadata>

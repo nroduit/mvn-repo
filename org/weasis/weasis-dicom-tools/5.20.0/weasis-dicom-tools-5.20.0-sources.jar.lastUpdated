@@ -1,0 +1,8 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Mon Jan 13 10:48:27 CET 2020
+https\://raw.github.com/nroduit/mvn-repo/master/.error=
+http\://nxrm.hcuge.ch\:8091/repository/maven-public/.error=
+http\://nxrm.hcuge.ch\:8091/repository/maven-public/.lastUpdated=1578908906820
+http\://repo1.maven.org/maven2/.error=
+http\://repo1.maven.org/maven2/.lastUpdated=1578908906873
+https\://raw.github.com/nroduit/mvn-repo/master/.lastUpdated=1578908907216
