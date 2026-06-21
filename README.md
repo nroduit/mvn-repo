@@ -1,4 +1,4 @@
-If ## Maven Repository ##
+## Maven Repository ##
 
 This is the Maven repository for third-party libraries not available in Maven Central. To use this repository maven add in your pom.xml:
 
@@ -9,8 +9,8 @@ This is the Maven repository for third-party libraries not available in Maven Ce
         <enabled>true</enabled>
         <updatePolicy>daily</updatePolicy>
       </snapshots>
-      <id>mvn-repo-master</id>
-      <name>Master Maven Repository</name>
+      <id>nroduit-mvn-repo</id>
+      <name>nroduit GitHub Maven Repository</name>
       <url>https://raw.githubusercontent.com/nroduit/mvn-repo/master/</url>
     </repository>
   </repositories>
