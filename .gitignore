@@ -3,3 +3,8 @@
 *.iws
 *.ipr
 .idea/
+
+# macOS / Python build cruft
+.DS_Store
+__pycache__/
+*.pyc
