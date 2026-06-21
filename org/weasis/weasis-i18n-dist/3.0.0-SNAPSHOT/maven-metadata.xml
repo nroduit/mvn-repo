@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<metadata modelVersion="1.1.0">
+  <groupId>org.weasis</groupId>
+  <artifactId>weasis-i18n-dist</artifactId>
+  <version>3.0.0-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <localCopy>true</localCopy>
+    </snapshot>
+    <lastUpdated>20260621081803</lastUpdated>
+  </versioning>
+</metadata>
