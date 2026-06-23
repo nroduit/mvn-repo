@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<parent>
-		<artifactId>weasis-i18n</artifactId>
-		<groupId>org.weasis</groupId>
-		<version>4.0.0</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent>
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.weasis</groupId>
 	<artifactId>weasis-i18n-dist</artifactId>
-	<packaging>pom</packaging>
 	<version>4.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>Weasis-i18n Distribution</name>
+
+	<!-- Intentionally has no <parent>: this artifact is published standalone to mvn-repo,
+	     where the reactor parent POM is not available. It still builds as part of the
+	     reactor because the root pom.xml aggregates it via <modules> (aggregation does
+	     not require inheritance). -->
 
 	<properties>
 		<output.pkg>.jar.xz</output.pkg>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<build>
@@ -22,6 +23,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
+				<version>3.2.0</version>
 				<executions>
 					<execution>
 						<id>merge</id>
@@ -40,8 +42,9 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<inherited>false</inherited>
+				<version>3.8.0</version>
 				<executions>
 					<execution>
 						<id>distro-assembly</id>
