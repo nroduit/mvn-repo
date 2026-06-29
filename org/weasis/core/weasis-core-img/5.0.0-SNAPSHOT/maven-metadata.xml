@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<metadata modelVersion="1.1.0">
+  <groupId>org.weasis.core</groupId>
+  <artifactId>weasis-core-img</artifactId>
+  <version>5.0.0-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <localCopy>true</localCopy>
+    </snapshot>
+    <lastUpdated>20260629092739</lastUpdated>
+  </versioning>
+</metadata>
