@@ -2,9 +2,9 @@
 <metadata>
   <groupId>org.weasis.core</groupId>
   <artifactId>weasis-core-img</artifactId>
-  <version>4.13.0</version>
+  <version>5.0.0</version>
   <versioning>
-    <release>4.13.0</release>
+    <release>5.0.0</release>
     <versions>
       <version>4.2.0</version>
       <version>4.2.1</version>
@@ -34,8 +34,9 @@
       <version>4.12.1</version>
       <version>4.12.2</version>
       <version>4.13.0</version>
+      <version>5.0.0</version>
       <version>5.0.0-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20260629092739</lastUpdated>
+    <lastUpdated>20260629093244</lastUpdated>
   </versioning>
 </metadata>
