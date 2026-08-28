@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.weasis.thirdparty</groupId>
+  <artifactId>jaxb-osgi</artifactId>
+  <version>4.0.9</version>
+  <packaging>jar</packaging>
+  <name>JAXB package for Weasis</name>
+  <description>
+    Single flat JAR aggregating the Jakarta XML Binding API and the Glassfish JAXB runtime, used by
+    Weasis to (de)serialize the XML graphic/presentation model. Since Weasis 5.0 the application is
+    a pf4j (no longer OSGi) container: this artifact has no Plugin-Id header, so the launcher stores
+    it in "common-lib/" and adds it to the system class loader. All classes therefore live at the
+    root of the JAR - nested "lib/*.jar" entries with an OSGi Bundle-ClassPath are NOT readable by a
+    plain URLClassLoader and must never be reintroduced.
+  </description>
+
+  <properties>
+    <!-- The project version tracks org.glassfish.jaxb:jaxb-runtime. -->
+    <jaxb.version>${project.version}</jaxb.version>
+    <maven.compiler.release>17</maven.compiler.release>
+    <enforcer.jdk-version>[17,)</enforcer.jdk-version>
+    <enforcer.maven-version>[3.9.0,)</enforcer.maven-version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Pins jakarta.xml.bind-api, jakarta.activation-api, angus-activation, istack, txw2
+           to the versions the JAXB release was built and tested against. -->
+      <dependency>
+        <groupId>org.glassfish.jaxb</groupId>
+        <artifactId>jaxb-bom</artifactId>
+        <version>${jaxb.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
+      <exclusions>
+        <!-- Optional codecs Weasis never reads or writes (plain XML only). -->
+        <exclusion>
+          <groupId>com.sun.xml.fastinfoset</groupId>
+          <artifactId>FastInfoset</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.jvnet.staxex</groupId>
+          <artifactId>stax-ex</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.6.3</version>
+        <executions>
+          <execution>
+            <id>min-requirement</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>${enforcer.maven-version}</version>
+                </requireMavenVersion>
+                <requireJavaVersion>
+                  <version>${enforcer.jdk-version}</version>
+                </requireJavaVersion>
+                <!-- Two copies of the same class in a flat JAR would silently shadow each other. -->
+                <banDuplicateClasses>
+                  <findAllDuplicates>true</findAllDuplicates>
+                </banDuplicateClasses>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>extra-enforcer-rules</artifactId>
+            <version>1.10.0</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.11.0</version>
+        <executions>
+          <execution>
+            <id>collect-licenses</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <!-- Six of the seven dependencies ship META-INF/LICENSE.md and NOTICE.md, and shade
+                   keeps only one of each. Give every component its own folder so the aggregate
+                   still carries the notices of all four Eclipse projects it redistributes. -->
+              <includes>META-INF/LICENSE*,META-INF/NOTICE*</includes>
+              <outputDirectory>${project.build.outputDirectory}/META-INF/licenses</outputDirectory>
+              <useSubDirectoryPerArtifact>true</useSubDirectoryPerArtifact>
+              <stripVersion>false</stripVersion>
+              <overWriteReleases>true</overWriteReleases>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.3.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+            <configuration>
+              <forceCreation>true</forceCreation>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.6.2</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <createDependencyReducedPom>false</createDependencyReducedPom>
+              <shadedArtifactAttached>false</shadedArtifactAttached>
+              <!-- Aggregates the dependencies' -sources jars into jaxb-osgi-x.y.z-sources.jar, so
+                   the IDE can step into JAXB. Replaces the former build-src/ module, which built
+                   the same thing from a hand-maintained (and drifting) dependency list. -->
+              <createSourcesJar>true</createSourcesJar>
+              <!-- No relocation: Weasis imports jakarta.xml.bind.* and
+                   org.glassfish.jaxb.runtime.v2.ContextFactory under their real names. -->
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <!-- Merged JPMS descriptors would be wrong and are useless on the class path. -->
+                    <exclude>module-info.class</exclude>
+                    <exclude>module-info.java</exclude>
+                    <exclude>META-INF/versions/*/module-info.class</exclude>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                    <exclude>META-INF/maven/**</exclude>
+                    <!-- Rebuilt by the ManifestResourceTransformer below. -->
+                    <exclude>META-INF/MANIFEST.MF</exclude>
+                    <!-- Superseded by META-INF/licenses/<artifact>/ assembled above. -->
+                    <exclude>META-INF/LICENSE</exclude>
+                    <exclude>META-INF/LICENSE.md</exclude>
+                    <exclude>META-INF/LICENSE.txt</exclude>
+                    <exclude>META-INF/NOTICE</exclude>
+                    <exclude>META-INF/NOTICE.md</exclude>
+                    <exclude>META-INF/NOTICE.txt</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+              <transformers>
+                <!-- Merges META-INF/services/jakarta.xml.bind.JAXBContextFactory and the
+                     jakarta.activation.spi.* providers; losing them breaks JAXBContext lookup. -->
+                <transformer
+                  implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                <transformer
+                  implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <manifestEntries>
+                    <Automatic-Module-Name>org.weasis.jaxb</Automatic-Module-Name>
+                    <Implementation-Title>${project.name}</Implementation-Title>
+                    <Implementation-Version>${project.version}</Implementation-Version>
+                  </manifestEntries>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.5.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.15.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.5.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>3.1.4</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.1.4</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
