@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.weasis.thirdparty</groupId>
+    <artifactId>sabre</artifactId>
+    <version>2.1.0</version>
+    <packaging>jar</packaging>
+    <name>Sabre (java-iso-tools) for Weasis</name>
+    <description>
+        Unmodified copy of com.github.stephenc.java-iso-tools:sabre:2.1.0 (Maven Central, jar and sources
+        byte-identical). Kept here because upstream is inactive. Flat POM with no parent; the upstream
+        dependencies (commons-lang, ant) are dropped because Weasis does not use the code paths that need them.
+    </description>
+    <url>https://github.com/stephenc/java-iso-tools</url>
+    <licenses>
+        <license>
+            <name>LGPL-2.1-or-later</name>
+            <url>https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</url>
+        </license>
+    </licenses>
+</project>
