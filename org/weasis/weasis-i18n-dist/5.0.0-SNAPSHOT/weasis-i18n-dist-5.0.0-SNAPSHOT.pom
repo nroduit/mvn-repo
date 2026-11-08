@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.weasis</groupId>
+	<artifactId>weasis-i18n-dist</artifactId>
+	<version>5.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Weasis-i18n Distribution</name>
+
+	<!-- Intentionally has no <parent>: this artifact is published standalone to mvn-repo,
+	     where the reactor parent POM is not available. It still builds as part of the
+	     reactor because the root pom.xml aggregates it via <modules> (aggregation does
+	     not require inheritance). -->
+
+	<properties>
+		<output.pkg>.jar.xz</output.pkg>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>3.2.0</version>
+				<executions>
+					<execution>
+						<!-- The packaged translations are checked once more: valid MessageFormat patterns, no lone
+						     apostrophe, no printf placeholder (the rules of TranslationChecks, a copy of the Weasis
+						     tests module; the arguments and the character limits are checked against the English
+						     sources in the Weasis build). Each module has already dropped the translations that
+						     break these rules (execution drop-invalid-translations of the parent), so a finding
+						     here means that step did not run. -->
+						<id>check-translations</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<exec executable="java" failonerror="true" dir="${project.basedir}">
+									<arg value="src/check/TranslationChecks.java" />
+									<arg value="${project.basedir}/.." />
+								</exec>
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<id>merge</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<concat destfile="etc/buildNumber.properties">
+									<fileset dir="src" includes="*.properties" />
+								</concat>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.8.0</version>
+				<executions>
+					<execution>
+						<id>distro-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<finalName>weasis-i18n</finalName>
+							<appendAssemblyId>false</appendAssemblyId>
+							<outputDirectory>${project.build.directory}/dist</outputDirectory>
+							<descriptors>
+								<descriptor>src/assembly/dist.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
